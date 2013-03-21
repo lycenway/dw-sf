@@ -1,5 +1,15 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
+<bean id="hiveDataSource"
+	class="com.lycenway.dw.HiveDataSource"
+	destroy-method="close">
+	<property name="driverClassName" value="com.lycenway.dw.SfdcHiveDriver" />
+</bean>
+<bean id="insertAccountHive"
+	class="com.lycenway.dw.HiveDataConfig"
+	singleton="true">
+	<property name="dataSource" ref="hiveDataSource" />
+</bean>
 <bean id="dbDataSource"
       class="org.apache.commons.dbcp.BasicDataSource"
       destroy-method="close">

@@ -1,5 +1,33 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
+
+    <bean id="hiveAccountExtractProcess"
+          class="com.salesforce.dataloader.process.ProcessRunner"
+          singleton="false">
+        <description>insertAccountHive</description>
+        <property name="name" value="hiveAccountExtract"/>
+        <property name="configOverrideMap">
+            <map>
+                <entry key="sfdc.debugMessages" value="true"/>
+                <entry key="sfdc.debugMessagesFile" value="sfdcSoapTrace.log"/>
+                <entry key="sfdc.endpoint" value="https://login.salesforce.com"/>
+                <entry key="process.encryptionKeyFile" value="lycenway.key"/>
+                <entry key="sfdc.username" value="chao.li@dianping.com"/>
+                <!-- password specified below is invalid, please generate one using the encrypt.bat utility -->
+                <entry key="sfdc.password" value="91dc9526a0d5a60ddf6ba2f18a269096824eea0d2609540cfe10fbc1505caa40cf4725a38241d6e1"/>
+                <entry key="sfdc.timeoutSecs" value="600"/>
+                <entry key="sfdc.loadBatchSize" value="200"/>
+                <entry key="sfdc.entity" value="Account"/>
+                <entry key="sfdc.extractionRequestSize" value="500"/>
+                <entry key="sfdc.extractionSOQL" value="Select Id, Name, Type, ParentId, Phone, AccountNumber, Website, Sic, AnnualRevenue, NumberOfEmployees, TickerSymbol FROM Account"/>
+                <entry key="process.operation" value="extract"/>
+                <entry key="process.mappingFile" value="accountExtractToDbMap.sdl"/>
+                <entry key="dataAccess.type" value="databaseWrite"/>
+                <entry key="dataAccess.name" value="insertAccountHive"/>
+            </map>
+        </property>
+    </bean>
+
     <bean id="accountMasterProcess"
           class="com.salesforce.dataloader.process.ProcessRunner"
           singleton="false">

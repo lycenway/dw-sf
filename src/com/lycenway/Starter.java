@@ -10,7 +10,7 @@ public class Starter {
 		String logging = "initial";
 		try {
 			logging += "starting";
-			ProcessRunner pr = ProcessRunner.getInstance("csvAccountExtractProcess");
+			ProcessRunner pr = ProcessRunner.getInstance("hiveAccountExtractProcess");
 			pr.setName("Starter");
 			pr.getConfigOverrideMap().put("sfdc.debugMessages", "true");
 			logging += pr.toString();
